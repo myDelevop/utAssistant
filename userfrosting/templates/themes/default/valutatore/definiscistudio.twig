@@ -1,0 +1,373 @@
+    {% extends "layouts/layout-valutatore.twig" %}
+
+    {% set page_group = "dashboard" %}
+
+    {# Set page properties (page.*) here. #}
+
+
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}    
+    {% set page = page | merge({
+    "title"       : "Definizione nuovo Studio",
+    "description" : "Descrizione di uno studio nuovo"
+    }) %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  </head>
+
+<input id="count-task" type="hidden" name="count-task" value="1">
+<!--<div class="row">
+    <div class="col-lg-12">
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-12">   
+-->
+
+    <form  class="form-horizontal" role="form" name="defStudio" action="{{site.uri.public}}/valutatore/definiscistudio" method="post">
+        <div class="tabs-x tabs-above tabs-krajee">
+            <ul id="myTab-kv-1" class="nav nav-tabs" role="tablist">
+                <li class="active"> 
+                    <a href="#home-kv-1" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-book"></i> Studio </a>
+                </li>
+                
+                <li>
+                    <a href="#profile-kv-1" role="tab-kv" data-toggle="tab"><i class="glyphicon glyphicon-tasks"></i> Task </a>
+                </li>
+                
+                <li>
+                    <a href="#dropdown-kv-1-1" role="tab-kv" data-toggle="tab"><i class="glyphicon glyphicon-user"></i> Utente </a>
+                </li>
+            </ul>
+            
+            <div id="myTabContent-kv-1" class="tab-content">
+                <div class="tab-pane fade in active" id="home-kv-1">
+					<center>
+						<h1>Definisci studio</h1>
+                    </center>
+					<div class="container-fluid" style='background-color: #efefef; border-radius: 5px'> 
+						<p></p>
+						<p><label>Obiettivo:</label><input type="text" class="form-control" name="obiettivo_studio" placeholder="Obiettivo dello studio"/></p>
+						<p><label>URL:</label><input type="url" class="form-control" name="url_studio" placeholder="http://www.sitodavalutare.com/"></p>
+						<p><label>Istruzioni:</label><textarea class="form-control" style='resize:none' rows="5" name="istruzioni_studio"></textarea></p>
+						<p><label>Commenti:</label><textarea class="form-control" style='resize:none' rows="3" name="commenti_studio"></textarea></p>
+						<div class="container-fluid" style='background-color:#e0e0e0; border-radius:5px'>
+							<div class="row">
+								<div class="col-sm-6">
+									<label>Tipologia questionario:</label>
+									<ul class="list-group">
+										<li class="list-group-item" style='border-color:#696969'><div class="checkbox"><label><input type="checkbox" name="questionario_sus" value="sus"> SUS</label></div>
+										<li class="list-group-item" style='border-color:#696969'><div class="checkbox"><label><input type="checkbox" name="questionario_attrakdiff" value="attrakdiff"> AttrackDiff</label></div>
+									</ul>
+								</div>
+								<div class="col-sm-6">
+								<label>Tipologia comportamento:</label>
+									<ul class="list-group">
+										<li class="list-group-item" style='border-color:#696969'><div class="checkbox"><label><input type="checkbox" value="audio" name="audio_studio"> Registra audio</label></div>
+										<li class="list-group-item" style='border-color:#696969'><div class="checkbox"><label><input type="checkbox" value="video" name="video_studio"> Registra video</label></div>
+										<li class="list-group-item" style='border-color:#696969'><div class="checkbox"><label><input type="checkbox" value="interazione" name="interazione_studio"> Registra interazione</label></div>
+									</ul>
+								</div>
+							</div>
+                        </div>
+                        <br>
+                        <p align="right">
+                            <button  id="tab1nex" class="btn btn-primary" type="button" onclick="changeTab(this.id)">Avanti <span class="glyphicon glyphicon-forward"></span></button>
+                        </p>
+					</div>  
+
+                </div>
+                <div class="tab-pane fade" id="profile-kv-1">
+					<div class="row">
+						<div class="col-sm-12">
+							<center>
+								<h1>Definsici tasks</h1>
+							</center>
+                            <div class="container-fluid" style='background-color: #efefef;' role="form"> 
+
+							<div  id=dynamicInput class="container-fluid" style='background-color: #efefef; border-radius: 5px' role="form"> 
+								<br>
+								<div id="form-group" class="container-fluid" style='background-color: #e0e0e0; border-radius: 5px' >
+									<p></p>
+									<p><label>Obiettivo:</label><input type="text" class="form-control" name="titolo_task[]" placeholder="Obiettivo del task"></p>
+									<p><label>Durata max (minuti):</label><input type="number" class="form-control" min="0" name="durata_task[]" placeholder="10"></p>
+									<p><label>URL:</label><input type="url" class="form-control" name="url_task[]" placeholder="http://www.sitodavalutare.com/"></p>
+									<p><label>Descrizione:</label><textarea class="form-control" style='resize:none' rows="5" name="descrizione_task[]"></textarea></p>
+								</div>
+								<br>
+                                
+							</div>   
+                                </div>
+                            <br><center>
+                                <button type="button" onClick="addInput('dynamicInput');" class="btn btn-success">Aggiungi Task</button>
+                                    </center>
+                            </div>
+						</div> <div class="row">
+                    
+                                <button id="tab1ret" style="float: left;" class="btn btn-primary" type="button" onclick="changeTab(this.id)"><span class="glyphicon glyphicon-backward"></span> Indietro</button> 
+				            
+                                <button id="tab2nex" style="float: right;" class="btn btn-primary" type="button" onclick="changeTab(this.id)">Avanti <span class="glyphicon glyphicon-forward"></span></button> 
+                    </div>
+
+				</div>
+
+                
+                <div class="tab-pane fade" id="dropdown-kv-1-1">
+                    
+                    <!--<div class="row">
+                    <div class="col-lg-12">  -->
+                    <h3>Invita utenti registrati</h3>
+                    <div class="table-hover table-condensed table-striped table-responsive">
+					<table class="table">
+					<thead>
+                            <tr>
+                                <th>Invita utente</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody> 
+                            {% for utente in utenti %}
+                            <tr>
+                                <td>
+                                    <input name="chkUser{{utente.id}}" value="10" tabindex="6" type="checkbox"> <br>
+                                </td>
+                                
+                                <td> 
+                                    {{ utente.user_name }}
+                                </td>
+                                
+                                <td>
+                                    {{ utente.email }} 
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+					</table>
+					</div>
+                    
+                    
+                        <h3>Invita utenti non registrati</h3>
+                        
+                            <div class="form-group">
+                                
+                                <label class="control-label col-sm-1" for="email">Email:</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" id="mail" name="mail" placeholder="esempio@esempio.es">
+                                </div>
+                                    
+                                <div class="col-sm-2">
+                                    <button type="button" onclick="aggiungiMail()" class="btn btn-default">Invita</button>
+                                </div>
+                            </div>
+                    
+                    
+                
+                    <div class="table-hover table-condensed table-striped table-responsive">
+					<table class="table">
+					<thead>
+                            <tr>
+                                <th>Utenti invitati</th>
+							
+                                <th></th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody id="tablemail"> 
+                        </tbody>
+					</table>
+					</div>
+                    
+                    <div class="row">
+                        
+                    <center><button type="submit" class="btn btn-success">
+                        Invia Dati
+                    </button>
+                        </center>
+                    <button id="tab2ret" style="float: left;" class="btn btn-primary" type="button" onclick="changeTab(this.id)"><span class="glyphicon glyphicon-backward"></span> Indietro </button>
+                    </div>
+                     
+                </div>
+            </div>
+        </div>
+    </form><br>
+
+{% endblock %}
+
+
+
+
+
+{% block page_scripts %}
+
+
+
+
+<script>
+    
+
+var counter = 1;
+var countermail = 0;
+
+    var limit = 10;
+    
+    var mailinvitate= [];
+
+    
+    function aggiungiMails(){
+        
+         var mail = document.getElementById('mail').value;
+var table = document.getElementById("tablemail");
+
+
+var row = table.insertRow(0);
+
+var cell1 = row.insertCell(0);
+
+cell1.innerHTML = "<td id='email"+countermail+"'><input name='mails[]' type='hidden' value='"+mail+"' />"+mail+"<button type='button' class='btn btn-success' onclick=removeMail('email"+countermail+"') ><span class='glyphicon glyphicon-remove'></span></button></td>";
+
+	countermail++;
+
+        
+        }
+		
+		 function aggiungiMail(){
+		 
+				var mail = document.getElementById('mail').value;
+			
+				var found = $.inArray(mail, mailinvitate) > -1;
+				
+			if(found){
+				alert('Utente già invitato');
+				}else{
+				var newdiv = document.createElement('div');
+			
+				newdiv.id="email"+countermail;
+			
+				newdiv.innerHTML = "<input name='mails[]' type='hidden' value='"+mail+"' />"+mail+"  <a onclick=removeMail('email"+countermail+"','"+mail+"') ><span class='glyphicon glyphicon-remove'></span></a>";
+				
+              document.getElementById('tablemail').appendChild(newdiv);
+			  
+				mailinvitate.push(mail);
+				document.getElementById('mail').value="";
+				
+              countermail++;
+			  }
+             
+             
+
+    }
+        
+		function removeMail(id,mail){
+         
+				var td = document.getElementById(id);
+				td.remove();
+             for(i=0;i<=mailinvitate.length;i++){
+				if(mail==mailinvitate[i])
+					mailinvitate.splice(i,1);
+					}
+                
+              countermail--;
+
+         
+
+    }
+    
+    function changeTab(id){
+        if(id=="tab1nex")
+            $('.nav-tabs a[href="#profile-kv-1"]').tab('show')
+            else if(id=="tab2nex")
+                $('.nav-tabs a[href="#dropdown-kv-1-1"]').tab('show')
+                else if(id=="tab1ret")
+                    $('.nav-tabs a[href="#home-kv-1"]').tab('show')
+                    else
+                        $('.nav-tabs a[href="#profile-kv-1"]').tab('show')
+                
+    }
+    function addInput(divName){
+
+         if (counter == limit)  {
+
+              alert("Hai raggiunto il limite massimo di " + counter + " inserimenti");
+
+         }
+
+         else {
+
+              var newdiv = document.createElement('div');
+             newdiv.id="inputdiv"+(counter+1);
+             
+                           newdiv.innerHTML = "<div id='form-group' class='container-fluid' style='background-color: #e0e0e0; border-radius: 5px' ><p></p><p><label>Obiettivo:</label><input type='text' class='form-control' name='titolo_task[]' placeholder='Obiettivo del task'></p><p><label>Durata max (minuti):</label><input type='number' class='form-control' min='0' name='durata_task[]' placeholder='10'></p><p><label>URL:</label><input type='url' class='form-control' name='url_task[]' placeholder='http://www.sitodavalutare.com/'></p><p><label>Descrizione:</label><textarea class='form-control' style='resize:none' rows='5' name='descrizione_task[]'></textarea></p></div><br><button type='button' onClick=removeInput('inputdiv"+(counter+1)+"'); class='btn btn-success'>Rimuovi task</button><br><br>";
+				
+              document.getElementById(divName).appendChild(newdiv);
+                
+                
+                
+                
+
+              counter++;
+             
+             
+         }
+
+    }
+
+function removeInput(remDivid){
+
+    
+             
+             remDiv=document.getElementById(remDivid);
+              
+             remDiv.remove();
+             
+                
+              counter--;
+
+         
+
+    }
+</script>
+
+
+
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            
+
+            // Load the validator rules for this form
+             var validators = {{validators | raw}};
+             ufFormSubmit(
+                    $("form[name='defStudio']"),
+                    validators,
+                    $("#userfrosting-alerts"),
+                    function(data, statusText, jqXHR) {
+                      // Reload the page on success
+                      window.location.reload(true);   
+                    }
+                );
+            });
+        </script>
+
+
+
+
+
+    <script src="{{site.uri.js}}/morris-data.js"></script>
+    <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+
+{% endblock %}

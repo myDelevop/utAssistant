@@ -1,0 +1,25 @@
+
+     {
+            "group_id" : {
+                "validators" : {
+                      "integer" : {
+                          "message" : "group_id must be an integer."
+                      }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                }
+            },
+            "title" : {
+                "validators" : {
+                    "length" : {
+                        "min" : 1,
+                        "max" : 150,
+                        "message" : "The new title must be between 1 and 150 characters long."
+                    }
+                },
+                "sanitizers" : {
+                    "raw" : ""
+                }
+            }
+        }

@@ -1,0 +1,251 @@
+{% extends "layouts/layout-valutatore.twig" %}
+{% set page_group = "dashboard" %}
+
+{# Set page properties (page.*) here. #}
+
+
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}    
+    {% set page = page | merge({
+        "title"       : "Definizione nuovo Studio",
+        "description" : "Descrizione di uno studio nuovo"
+    }) %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">   
+
+<form method="post">
+    
+        <div class="tabs-x tabs-above tabs-krajee">
+                    <ul id="myTab-kv-1" class="nav nav-tabs" role="tablist">
+                        <li class="active"><a href="#home-kv-1" role="tab" data-toggle="tab"><i class="glyphicon glyphicon-remove"></i> Studio</a></li>
+                        <li><a href="#profile-kv-1" role="tab-kv" data-toggle="tab"><i class="glyphicon glyphicon-user"></i>
+                            Task</a></li>
+                        
+                        <li><a href="#dropdown-kv-1-1" role="tab-kv" data-toggle="tab"><i class="glyphicon glyphicon-user"></i>
+                            Utente</a></li>
+                        
+                        
+                        <!--<li class="dropdown">
+                            <a href="#" id="myTabDrop-kv-1" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-list-alt"></i> Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop-1">
+                                <li><a href="#dropdown-kv-1-1" tabindex="-1" role="tab" data-toggle="tab">
+                                    <i class="glyphicon glyphicon-chevron-right"></i> Option 1</a></li>
+                                <li><a href="#dropdown-kv-1-2" tabindex="-1" role="tab" data-toggle="tab">
+                                    <i class="glyphicon glyphicon-chevron-right"></i> Option 2</a></li>
+                            </ul>
+                        </li>-->
+                    </ul>
+                    <div id="myTabContent-kv-1" class="tab-content">
+                        <div class="tab-pane fade in active" id="home-kv-1">
+                                <h4>Obiettivo Studio: <input type="text" name="obiettivo_studio" /></h4>
+                                <br>    
+                                <h4>Istruzioni per l'utente: <input type="text" name="istruzioni_studio" /></h4>
+                                <br>
+                                <h4>Commenti: <input type="text" name="commenti_studio" /></h4>
+                                <br>    
+                                <h4>URL del Sito da Valutare: <input type="url" name="url_studio"></h4>
+                                <br>
+
+
+                            	<br>
+	                            <h4>Tipo Questionario:</h4> <input type="checkbox" name="questionario_studio" value="sus"> SUS <input type="checkbox" name="questionario_studio" value="attrakdiff"> AttrakDiff
+	                            <br>
+                                <il><input name="registrazione_studio" type="checkbox" value="audio">Registra audio
+                                <br>
+                                <input name="registrazione_studio" type="checkbox" value="video">Registra video</il>
+                                <br><il><input name="registrazione_studio" type="checkbox" value="interazione">Registra interazione</il>
+                                <br>
+
+
+                                   
+                            
+                        </div>
+                        <div class="tab-pane fade" id="profile-kv-1">
+                            
+                            <div id=dynamicInput>    
+                                Task:<h4>Titolo task    <input type="text" name="titolo_task[]"></h4>
+                                <h4>URL del Sito da Valutare: <input type="url" name="url_studio[]"></h4>
+                                <h4>Descrizione task    <input type="text" name="descrizione_task[]"></h4>
+                                <h4>Durata max    <input type="number" min="0" name="durata_task[]"></h4>
+                            </div>
+	                       <button type="button" onClick="addInput('dynamicInput');" class="btn btn-circle btn-success">+</button>
+                            
+                            
+                            
+                        </div>
+                            
+
+                        <div class="tab-pane fade" id="dropdown-kv-1-1">
+
+                            
+                            
+                            
+                            
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">   
+	<table class="table table-hover table-condensed table-striped table-responsive tablesorter">
+    <thead>
+      <tr>
+        <th>Invita utenti registrati</th>
+        <th>Username</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+                       <!--     <input name="chkNumero" value="1" tabindex="3" type="checkbox"> Uno<br>
+							<input name="chkNumero" value="2" tabindex="5" type="checkbox"> Due<br>
+							<input name="chkNumero" value="3" tabindex="7" type="checkbox"> Tre<br>
+							<input name="chkNumero" value="4" tabindex="8" type="checkbox"> Quattro<br>
+							<input name="chkNumero" value="5" tabindex="9" type="checkbox"> Cinque<br>
+							<input name="chkNumero" value="6" tabindex="1" type="checkbox"> Sei<br>
+							<input name="chkNumero" value="7" tabindex="2" type="checkbox"> Sette<br>
+							<input name="chkNumero" value="8" tabindex="4" type="checkbox"> Otto<br>
+							<input name="chkNumero" value="9" tabindex="10" type="checkbox"> Nove<br>-->
+	
+        {% for utente in utenti %}
+            <tr>
+                <td><input name="chkNumero" value="10" tabindex="6" type="checkbox"> <br></td>
+               <td> {{ utente.user_name }} </td>
+               <td> {{ utente.email }} </td>
+
+            </tr>
+
+        {% endfor %}
+
+ 
+
+    </tbody>
+  </table>
+        <form name="inviamail" action="{{site.uri.public}}/valutatore/definiscistudio" method="post"><h4>Invita utenti non registrati</h4>
+            E-mail:<input type=email>
+            <button class="btn btn-success" type="submit" >Invia mail</button>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+                            
+                            
+                            
+                            
+                            
+                            <button type="submit" class="btn btn-success">
+                                        invia dati
+                                    </button>
+
+                        </div>
+                    
+                </div>
+                                    </div>
+
+    
+
+    </form>
+    </div>
+</div>
+<br>
+<br>
+
+<input type='checkbox' name='thing' value='valuable' id="thing"/><label for="thing"></label>
+
+
+
+
+
+
+
+{% endblock %}
+{% block page_scripts %}
+        
+ <script>
+        
+            $(document).ready(function() { 
+                alert("ciaociao");
+                               // Load the validator rules for this form
+                var validators = {{validators | raw}};
+                ufFormSubmit(
+                  $("form[name='inviamail']"),
+                  validators,
+                  $("#userfrosting-alerts"),
+                  function(data, statusText, jqXHR) {
+                      // Reload the page on success
+                      window.location.reload(true);   
+                  }
+                );
+            });
+        </script>
+
+
+
+
+<script>
+var counter = 1;
+
+    var limit = 20;
+
+    function addInput(divName){
+
+         if (counter == limit)  {
+
+              alert("You have reached the limit of adding " + counter + " inputs");
+
+         }
+
+         else {
+
+              var newdiv = document.createElement('div');
+             newdiv.id="inputdiv"+(counter+1);
+             
+                           newdiv.innerHTML = "<br>Task: <br><h4>Titolo task: <input id='titolo"+counter+"' type='text' name='titolo[]'></h4><h4>URL sito da valutare: <input id='sito"+counter+"' type='url' name='url[]'></h4><h4>Descrizione task: <input id='descrizione"+counter+"' type='text' name='descrizione[]'></h4><h4>Durata max: <input id='durata"+counter+"' type='number' name='durmax[]' min='0'></h4><button type='button' onClick=removeInput('inputdiv"+(counter+1)+"'); class='btn btn-success'>Rimuovi task</button><br><br>";
+
+              document.getElementById(divName).appendChild(newdiv);
+                
+                
+                
+                
+
+              counter++;
+             
+             
+         }
+
+    }
+
+function removeInput(remDivid){
+
+    
+             
+             remDiv=document.getElementById(remDivid);
+              
+             remDiv.remove();
+             
+                
+              counter--;
+
+         
+
+    }
+</script> 
+
+    <script src="{{site.uri.js}}/morris-data.js"></script>
+    <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+
+
+
+
+
+{% endblock %}

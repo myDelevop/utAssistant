@@ -1,0 +1,151 @@
+{% extends "layouts/layout-valutatore.twig" %}
+{% set page_group = "dashboard" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}    
+    {% set page = page | merge({
+        "title"       : "Analisi studio",
+        "description" : "Analisi di uno studio effettuato e completato."
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+
+<head><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></head>
+
+<div class="row">
+    <div class="col-lg-12">
+		<div class="table-hover table-condensed table-striped table-responsive">
+		<table class="table">
+			<thead>
+      <tr class="info">
+      <h3>Studi completati</h3>
+
+        <th>Obiettivo</th>
+        <th>URL</th>
+        <th>Commenti</th>
+        <th>Questionari</th>
+        <th>Comportamento</th>
+        <th>Audio</th>
+        <th>Video</th>
+
+      </tr>
+    </thead>
+       
+    <tbody>
+        
+        {% for studio in studiCompletati %}
+        
+            <tr class="success">
+               <td> {{ studio.obiettivo }} </td>
+               <td> <a href="{{ studio.url }}">{{ studio.url }}</a></td>
+               <td> {{ studio.commenti  }} </td>
+               <td> <a href="http://google.com">
+						<span class="glyphicon glyphicon-list-alt"></span>
+					</a>
+			   </td>
+               <td>
+					<a href="http://google.com">
+						<span class="glyphicon glyphicon-film"></span>
+					</a>
+			   </td>
+               <td> <a href="http://google.com">
+						<span class="glyphicon glyphicon-volume-up"></span>
+					</a>
+			   </td>
+               <td>
+					<a href="http://google.com">
+						<span class="glyphicon glyphicon-facetime-video"></span>
+					</a>
+			   </td>
+
+            </tr>
+
+        {% endfor %}
+        
+
+		</tbody>
+		</table>
+		</div>
+    </div>
+</div>
+<hr align=”left” size=”1″ width=”300″ color=”red” noshade>
+<div class="row">
+    <div class="col-lg-12">
+<div class="table-hover table-condensed table-striped table-responsive">
+	<table class="table">
+		<thead>
+      <tr class="info">
+                <h3>Studi non completati</h3>
+
+        <th>Obiettivo</th>
+        <th>URL</th>
+        <th>Commenti</th>
+        <th>SUS</th>
+        <th>Attrkadiff</th>
+        <th>Audio</th>
+        <th>Video</th>
+        <th>Interazione</th>
+
+      </tr>
+    </thead>
+        
+    <tbody>
+                
+          {% for studio in studiNonCompletati %}
+            <tr>
+               <td> {{ studio.obiettivo }} </td>
+               <td> <a href="{{ studio.url }}">{{ studio.url }}</a> </td>
+               <td> {{ studio.commenti  }} </td>
+
+               {% if studio.somministra_sus == 1 %}
+               <td> <span class="glyphicon glyphicon-ok-sign text-success"></span></td> 
+                {% else %}
+               <td> <span class="glyphicon glyphicon-remove-sign text-danger"></span> </td>
+                {% endif%}
+
+                {% if studio.somministra_attrakdiff== 1 %}
+               <td> <span class="glyphicon glyphicon-ok-sign text-success"></span></td>                
+                {% else %}
+               <td> <span class="glyphicon glyphicon-remove-sign text-danger"></span> </td>
+                {% endif%}
+
+                {% if studio.registra_audio== 1 %}
+               <td> <span class="glyphicon glyphicon-ok-sign text-success"></span></td>
+                {% else %}
+               <td> <span class="glyphicon glyphicon-remove-sign text-danger"></span> </td>
+                {% endif%}
+
+                {% if studio.registra_video == 1 %}
+               <td> <span class="glyphicon glyphicon-ok-sign text-success"></span></td>
+                {% else %}
+               <td> <span class="glyphicon glyphicon-remove-sign text-danger"></span> </td>
+                {% endif%}
+
+                {% if studio.registra_comportamento== 1 %}
+               <td> <span class="glyphicon glyphicon-ok-sign text-success"></span></td>
+                {% else %}
+               <td> <span class="glyphicon glyphicon-remove-sign text-danger"></span> </td>
+                {% endif%}            
+            </tr>
+
+        {% endfor %}
+
+    </tbody>
+	</table>
+</div>	
+</div>
+</div>
+{% endblock %}
+{% block page_scripts %}
+    <script src="{{site.uri.js}}/morris-data.js"></script>
+    <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+ 
+
+
+{% endblock %}

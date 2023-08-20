@@ -1,0 +1,43 @@
+{% extends "layouts/layout-valutatore.twig" %}
+{% set page_group = "dashboard" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}    
+    {% set page = page | merge({
+        "title"       : "Associa Studio",
+        "description" : "Associa lo studio ad un utente in base alla sua e-mail"
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Associazione Studi</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">   
+	
+
+	<h4>Studio: <select name="studi"><option>Studio 1</option></select></h4>
+	<br>
+	<h4>E-mail utente: <input type="mail"  name="mail_user" /></h4>
+	<br>
+	<button type="submit" class="btn btn-success">
+            Associa
+        </button>
+
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}
+{% block page_scripts %}
+    <script src="{{site.uri.js}}/morris-data.js"></script>
+    <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+{% endblock %}

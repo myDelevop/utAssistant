@@ -1,0 +1,44 @@
+{% extends "layouts/layout-valutatore.twig" %}
+{% set page_group = "dashboard" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}    
+    {% set page = page | merge({
+        "title"       : "Dashboard",
+        "description" : "Home Page del valutatore"
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+ <head> 
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> 
+ </head> 
+ 
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="container-fluid">
+<div class="row">
+	<div class="col-lg-6">   
+	<center><a href="{{site.uri.public}}/valutatore/definiscistudio"><i id="icon" class="fa fa-gears" style="text-shadow: rgb(48, 117, 165) 0px 0px 0px, rgb(49, 120, 169) 1px 1px 0px, rgb(50, 123, 173) 2px 2px 0px, rgb(51, 126, 178) 3px 3px 0px, rgb(53, 129, 182) 4px 4px 0px, rgb(54, 133, 187) 5px 5px 0px, rgb(55, 136, 191) 6px 6px 0px, rgb(57, 139, 195) 7px 7px 0px, rgb(58, 142, 200) 8px 8px 0px, rgb(59, 145, 204) 9px 9px 0px, rgb(60, 148, 209) 10px 10px 0px, rgb(62, 151, 213) 11px 11px 0px, rgb(63, 154, 217) 12px 12px 0px, rgb(64, 158, 222) 13px 13px 0px, rgb(65, 161, 226) 14px 14px 0px, rgb(67, 164, 231) 15px 15px 0px; font-size: 200px; color: rgb(255, 255, 255); height: 300px; width: 300px; line-height: 300px; border-radius: 50%; text-align: center; background-color: rgb(68, 167, 235);"></i> </a><h3><b>Definizione nuovo Studio</b></h3></center>
+	</div>
+	<div class="col-lg-6"> 
+	<center><a href="{{site.uri.public}}/valutatore/analisistudio"><i id="icon" class="fa fa-binoculars" style="text-shadow: rgb(73, 155, 60) 0px 0px 0px, rgb(75, 160, 62) 1px 1px 0px, rgb(77, 164, 63) 2px 2px 0px, rgb(79, 168, 65) 3px 3px 0px, rgb(81, 172, 67) 4px 4px 0px, rgb(83, 176, 68) 5px 5px 0px, rgb(85, 180, 70) 6px 6px 0px, rgb(86, 185, 71) 7px 7px 0px, rgb(88, 189, 73) 8px 8px 0px, rgb(90, 193, 75) 9px 9px 0px, rgb(92, 197, 76) 10px 10px 0px, rgb(94, 201, 78) 11px 11px 0px, rgb(96, 205, 80) 12px 12px 0px, rgb(98, 210, 81) 13px 13px 0px, rgb(100, 214, 83) 14px 14px 0px, rgb(102, 218, 84) 15px 15px 0px; font-size: 182px; color: rgb(255, 255, 255); height: 300px; width: 300px; line-height: 300px; border-radius: 50%; text-align: center; background-color: rgb(104, 222, 86);"></i></a> <h3><b>Analisi Studi</b></h3></center>
+	</div>
+</div>
+</div>
+<br>
+<br>
+{% endblock %}
+{% block page_scripts %}
+    <script src="{{site.uri.js}}/morris-data.js"></script>
+    <script src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+{% endblock %}

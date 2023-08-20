@@ -1,0 +1,19 @@
+{% block subject %}
+    {{site.site_title}} - invito ad accedere alla piattaforma UTAssistant
+{% endblock %}
+
+{% block body %}
+<p>
+Sei stato invitato sulla piattaforma UTAssistant per partecipare ad uno studio sull'usabilita', con l'obiettivo di {{stud.obiettivo}}.
+</p>
+<p>Per accedere al sito <a href="{{site.uri.public}}">{{site.uri.public}}</a> questi sono i tuoi dati d'accesso:</p>
+<p>Username: {{user.email}}</p>
+<p>Password: {{password}}</p>
+<p>
+E' fortemente consigliato cambiare i dati di accesso poichè la password è stata autogenerata dal sistema.
+</p>
+<p>
+Grazie,<br>
+{{site.site_title}} Team
+</p>
+{% endblock %}

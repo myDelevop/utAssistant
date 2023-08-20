@@ -1,0 +1,20 @@
+{
+    "name": "diiimonn/yii2-widget-next-button",
+    "description": "Widget render wrap container for a list with next button",
+    "keywords": ["next", "button", "jquery", "ajax", "yii2", "extension", "widget"],
+    "homepage": "https://github.com/diiimonn/yii2-widget-next-button",
+    "type": "yii2-extension",
+    "minimum-stability": "dev",
+    "version": "v1.0.0",
+    "authors": [
+        {
+            "name": "Dmitriy Gavrilenko",
+            "email": "diiimonn@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "diiimonn\\widgets\\": ""
+        }
+    }
+}

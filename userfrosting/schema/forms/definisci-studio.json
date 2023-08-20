@@ -1,0 +1,26 @@
+{
+    "obiettivo_studio" : {
+        "validators" : {
+            "required" : {
+                "message" : "l'obiettivo è un campo obbligatorio"
+            }
+        }    
+    },
+    
+    "url_studio" : {
+        "validators" : {
+            "required" : {
+                "message" : "l'url è un campo obbligatorio"
+            }
+        }
+    },
+    
+    "count(titolo_task[])" : {
+        "validators" : {
+            "length" : {
+                "min" : 3
+            }
+        }
+        
+    }
+}
